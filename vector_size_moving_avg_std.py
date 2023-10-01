@@ -50,7 +50,7 @@ for j in range(1, TMS_data.shape[0]):
     # Calculate moving variance for the last 'window' values
     if len(data) >= window:
         moving_var = np.var(data[-window:]) #choose last three(window=3) values of data(list)
-        if result > 2.5 * np.sqrt(moving_var):
+        if abs(result - ma[-1]) >  np.sqrt(moving_var):
             result = ma[-1]
     # if previous moving average > current moving average, break
     if j >= window and ma[j - window] > ma[j - window + 1]:
