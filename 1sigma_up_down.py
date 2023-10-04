@@ -50,10 +50,9 @@ for j in range(1, TMS_data.shape[0]):
     estimated = ma[-1]
     # moving_std.append(np.std(data[-window:]))
     estimated = (1-alpha) * estimated + alpha*result
-    dev = np.std(data[-window:])
-    dev = (1-beta)*dev + beta*(abs(result - estimated))
-    stddev = np.sqrt(dev)
-    moving_std.append(stddev)
+    var = np.var(data[-window:])
+    var = (1-beta)*var + beta*(abs(result - estimated))
+    moving_std.append(np.sqrt(var))
 
 
 #Plot values
