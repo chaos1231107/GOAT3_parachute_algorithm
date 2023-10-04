@@ -33,10 +33,10 @@ data = []
 window = 3
 relative_vector = []
 time_stamp = []
-error_point = []
-error_cnt = 0
+# error_point = []
+# error_cnt = 0
 
-for j in range(1, TMS_data.shape[0]):
+for j in range(1, TMS_data.shape[0]+1):
     prev_position = pos[j - 1]
     curr_position = pos[j]
     result = cal_relative_vector(prev_position, curr_position)
