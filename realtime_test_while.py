@@ -23,8 +23,8 @@ time_stamp = []
 window = 3
 data = []
 moving_std = []
-beta = 0.25
 alpha = 0.125
+beta = 0.25
 
 while True:
     # Generate random real number (0 ~ 100)
@@ -48,6 +48,8 @@ while True:
     var = np.var(relative_vector[-window:])
     var = (1 - beta) * var + beta * (abs(result - estimated))
     moving_std.append(np.sqrt(var))
+    print(result)
+    time.sleep(0.1)
 
     # Plot values
     plt.clf()
