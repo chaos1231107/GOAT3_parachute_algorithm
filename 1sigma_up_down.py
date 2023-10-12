@@ -13,7 +13,7 @@ for target in targets:
 pos = np.array(pos)
 
 #Calculate vector size based on relative position
-def cal_relative_vector(prev_position, curr_position):
+def cal_relative_vector(curr_position, prev_position):
     vector_size = np.linalg.norm(prev_position - curr_position) #calculate 'Three Dimentional Eucliean Distance'
     return vector_size
 
@@ -47,11 +47,12 @@ for j in range(1, TMS_data.shape[0]):
 
     ma = moving_average(data, window)
     ma = np.array(ma)
+    # estimatedRTT[n] = (1-alpha) * Estimated[n-1] + alpha * sampleRTT[n]
     estimated = ma[-1]
-    # moving_std.append(np.std(data[-window:]))
-    estimated = (1-alpha) * estimated + alpha*result
-    var = np.var(data[-window:])
-    var = (1-beta)*var + beta*(abs(result - estimated))
+    estimated = (1-alpha) * estimated + alpha * result
+    #DevRTT[n] = (1-beta) * DevRTT[n-1] + beta * |SampleRTT - Estimated|
+    var = np.var(data[-window:]) # read last three data for size of window(window=3)
+    var = (1-beta)*var + beta * (abs(result - estimated))
     moving_std.append(np.sqrt(var))
 
 
